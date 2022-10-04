@@ -1,15 +1,12 @@
 import '../App.css';
-import HeaderBar from '../Components/Header';
+import Event from '../Components/Event';
+import EventCard from './ViewEvents/EventCard';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <HeaderBar className="HeaderBar"/>
-        <p>
-          as
-        </p>
-       
+        <EventCard/>
       </header>
     </div>
   );

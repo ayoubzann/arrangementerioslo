@@ -1,20 +1,27 @@
 import React from "react";
+import {useState, useEffect} from "react";
+import Event from "../../Components/Event";
+
 
 export default function EventCard() {
 
-    return(
+    const [events, setEvents] = useState([])
+
+    const getEvents = async () => {
+        const response = await fetch('https://localhost:7031/api/Arrangements');
+        setEvents(await response.json());
+    }
+
+    useEffect(() => {
+        getEvents()        
+    }, [])
+
+    return (
     <div>
-        <h1>Event name</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna 
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-         ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-         Duis aute irure dolor in reprehenderit in voluptate velit
-          esse cillum dolore eu fugiat nulla pariatur. Excepteur 
-          sint occaecat cupidatat non proident, sunt in culpa qui 
-          officia deserunt mollit anim id est laborum.</p>
-          <p>Time: 29.09.2022</p>
-          <p>Location: Eventlocation</p>
+        <h1>Arrangementer:</h1>
+        {events.map(event => { 
+            return ( 
+                <Event name={event.name} description={event.description} id={event.id}/>)})}
     </div>
     ) 
 }
